@@ -48,8 +48,8 @@ func backup(ipaddress string, token string, outfile string) {
 
     outstring := ""
 	for _, element := range pairs {
-        encoded_value := base64.StdEncoding.EncodeToString(element.Value)
-        outstring += fmt.Sprintf("%s:%s\n", element.Key, encoded_value)
+        //encoded_value := base64.StdEncoding.EncodeToString(element.Value)
+        outstring += fmt.Sprintf("%s:%s\n", element.Key, element.Value)
 	}
 
     file, err := os.Create(outfile)
@@ -114,13 +114,13 @@ func restore(ipaddress string, token string, infile string) {
     for _, element := range strings.Split(string(data), "\n") {
         kvp := strings.Split(element, ":")
 
-        if len(kvp) > 1 {
-            decoded_value, decode_err := base64.StdEncoding.DecodeString(kvp[1])
-            if decode_err != nil {
-                panic(decode_err)
-            }
+        //if len(kvp) > 1 {
+            //decoded_value, decode_err := base64.StdEncoding.DecodeString(kvp[1])
+            //if decode_err != nil {
+            //    panic(decode_err)
+            //}
 
-            p := &api.KVPair{Key: kvp[0], Value: decoded_value}
+            p := &api.KVPair{Key: kvp[0], Value: kvp[1]}
             _, err := kv.Put(p, nil)
             if err != nil {
                 panic(err)
