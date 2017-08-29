@@ -1,6 +1,8 @@
 Consul Backup and Restore tool.
 
+```
 PS: Forked from kailunshi/consul-backup to backup consul kv without base encoding
+```
 
 This will use consul-api (Go library) to recursively backup and restore all your
 key/value pairs.
